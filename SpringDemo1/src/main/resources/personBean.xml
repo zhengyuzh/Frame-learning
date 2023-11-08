@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--
+        声明bean（告诉spring要创建某个类的对象）
+        1、id：自定义名称，唯一值，spring通过该id的属性值找到对象
+        2、class：要创建类的全限定类名
+        3、下述的声明语句在spring底层类似与执行了以下代码：
+            PersonServiceImpl personService = new PersonServiceImpl();
+        4、对象的保存：
+            spring将对象保存到内部的map中，map.put(id值，对象)
+            map.put("personService",new PersonServiceImpl())
+        5、一个bean标签声明一个java对象
+        6、spring容器根据bean标签创建对象，尽管存在class属性相同的bean标签，只要是id值不同，
+           spring容器就会创建该class的对象
+    -->
+    <bean id="personService" class="com.zyz.SpringDemo1.service.impl.PersonServiceImpl"></bean>
+    <bean id="personService2" class="com.zyz.SpringDemo1.service.impl.PersonServiceImpl"></bean>
+
+    <!--
+       spring容器也可以创建非自定义类的对象，例如java.lang.String类的对象，只要指定了
+       class属性，spring容器就可以创建该类的对象
+   -->
+    <bean id="myString" class="java.lang.String"/>
+
+</beans>
+

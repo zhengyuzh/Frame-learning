@@ -125,4 +125,34 @@ public class Demo1 {
 
     }
 
+    /**
+     * 注入的方式 set方式 注入属性测试
+     *  属性的值赋予 属性是外部Bean 外部对象
+     */
+    @Test
+    public void TestDemo7() {
+        String config = "StudentAndAddress.xml";
+        ApplicationContext ac = new ClassPathXmlApplicationContext(config);
+        Student student = (Student) ac.getBean("student");
+        System.out.println(student);
+        // 输出结果：Student{name='张三', age=18, address=Address{province='河南', city='郑州'}}
+
+    }
+
+
+    /**
+     * 注入的方式 set方式 注入属性测试
+     *  属性的值赋予 内部Bean 外部对象
+     */
+    @Test
+    public void TestDemo8() {
+        String config = "StudentAndAddress.xml";
+        ApplicationContext ac = new ClassPathXmlApplicationContext(config);
+        Student student = (Student) ac.getBean("student2");
+        System.out.println(student);
+        //输出结果：Student{name='李四', age=23, address=Address{province='广东', city='广州'}}
+
+    }
+
+
 }

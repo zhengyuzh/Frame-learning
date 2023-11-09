@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--声明Student对象-->
+    <bean id="student" class="com.zyz.SpringDemo1.entity.Student">
+        <property name="name" value="张三"></property>
+        <property name="age" value="18"></property>
+        <!--注入 Address 对象
+                   name 属性：类里面属性名称
+                   ref 属性：创建 Address 对象 bean 标签 id 值
+         -->
+        <property name="address" ref="address"></property>
+    </bean>
+
+    <!--声明Address对象-->
+    <bean id="address" class="com.zyz.SpringDemo1.entity.Address">
+        <property name="province" value="河南"></property>
+        <property name="city" value="郑州"></property>
+    </bean>
+
+    <!--内部 Bean 的形式-->
+    <bean id="student2" class="com.zyz.SpringDemo1.entity.Student">
+        <property name="name" value="李四"></property>
+        <property name="age" value="23"></property>
+        <!--注入 Address 对象
+                   name 属性：类里面属性名称
+                   直接创建内部对象
+         -->
+        <property name="address">
+            <bean id="address2" class="com.zyz.SpringDemo1.entity.Address">
+                <property name="province" value="广东"></property>
+                <property name="city" value="广州"></property>
+            </bean>
+        </property>
+    </bean>
+
+</beans>
+

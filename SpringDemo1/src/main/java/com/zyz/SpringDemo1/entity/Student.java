@@ -10,6 +10,8 @@ public class Student {
     private String name;
     private Integer age;
 
+    private Address address; // 引用类型属性
+
     public String getName() {
         return name;
     }
@@ -26,11 +28,29 @@ public class Student {
         this.age = age;
     }
 
+    // @Override
+    // public String toString() {
+    //     return "Student{" +
+    //             "name='" + name + '\'' +
+    //             ", age=" + age +
+    //             '}';
+    // }
+
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
     @Override
     public String toString() {
         return "Student{" +
                 "name='" + name + '\'' +
                 ", age=" + age +
+                ", address=" + address +
                 '}';
     }
 }

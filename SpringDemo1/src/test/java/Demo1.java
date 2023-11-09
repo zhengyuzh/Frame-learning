@@ -1,5 +1,6 @@
 import com.zyz.SpringDemo1.entity.Person;
 import com.zyz.SpringDemo1.entity.Student;
+import com.zyz.SpringDemo1.entity.UniversityStudent;
 import com.zyz.SpringDemo1.service.PersonService;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -100,6 +101,27 @@ public class Demo1 {
         ApplicationContext ac = new ClassPathXmlApplicationContext(config);
         Student student = (Student) ac.getBean("student3");
         System.out.println(student); // 输出结果：Student{name='<<王五>>', age=23}
+
+    }
+
+    /**
+     * 注入的方式 set方式 注入属性测试
+     *  属性的值赋予 集合类
+     */
+    @Test
+    public void TestDemo6() {
+        String config = "UniversityStudentBean.xml";
+        ApplicationContext ac = new ClassPathXmlApplicationContext(config);
+        UniversityStudent universityStudent = (UniversityStudent) ac.getBean("universityStudent");
+        System.out.println(universityStudent);
+        /**
+         * UniversityStudent{name='张三',
+         *                   courses=[C语言, Go语言, Java语言],
+         *                   fruitList=[🍎苹果, 🍑桃子, 🍇葡萄],
+         *                   sportMaps={basketball=篮球, football=足球, badminton=羽毛球},
+         *                   hobbySets=[读书, 敲代码, 听音乐]
+         *                  }
+         */
 
     }
 

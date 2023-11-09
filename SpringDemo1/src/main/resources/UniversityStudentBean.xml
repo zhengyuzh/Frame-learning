@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 配置 UniversityStudent 对象创建-->
+    <bean id="universityStudent" class="com.zyz.SpringDemo1.entity.UniversityStudent">
+        <property name="name" value="张三"></property>
+
+        <!--1、数组类型属性注入-->
+        <property name="courses">
+            <array>
+                <value>C语言</value>
+                <value>Go语言</value>
+                <value>Java语言</value>
+            </array>
+        </property>
+
+        <!--2、list类型属性注入  水果-->
+        <property name="fruitList">
+            <list>
+                <value>🍎苹果</value>
+                <value>🍑桃子</value>
+                <value>🍇葡萄</value>
+            </list>
+        </property>
+
+        <!--3、map类型属性注入 体育运动 -->
+        <property name="sportMaps">
+            <map>
+                <entry key="basketball" value="篮球"/>
+                <entry key="football" value="足球"/>
+                <entry key="badminton" value="羽毛球"/>
+            </map>
+        </property>
+
+        <!--4、set类型属性注入 爱好-->
+        <property name="hobbySets">
+            <set>
+                <value>读书</value>
+                <value>敲代码</value>
+                <value>听音乐</value>
+            </set>
+        </property>
+
+    </bean>
+
+</beans>
+

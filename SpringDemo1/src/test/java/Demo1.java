@@ -1,4 +1,5 @@
 import com.zyz.SpringDemo1.entity.Person;
+import com.zyz.SpringDemo1.entity.School;
 import com.zyz.SpringDemo1.entity.Student;
 import com.zyz.SpringDemo1.entity.UniversityStudent;
 import com.zyz.SpringDemo1.service.PersonService;
@@ -154,5 +155,25 @@ public class Demo1 {
 
     }
 
+    /**
+     * 注入的方式 set方式 注入属性测试
+     *  属性的值赋予 内部Bean 外部对象
+     */
+    @Test
+    public void TestDemo9() {
+        String config = "SchoolBean.xml";
+        ApplicationContext ac = new ClassPathXmlApplicationContext(config);
+        School school = (School) ac.getBean("school");
+        System.out.println(school);
+        //构造参数按照顺序 输出结果：School{name='国防科技大学', address='Address{province='湖南', city='长沙'}', hisotry=70}
+
+        School school2 = (School) ac.getBean("school2");
+        System.out.println(school2);
+        //构造参数不按照顺序 输出结果：School{name='国防科技大学', address='Address{province='湖南', city='长沙'}', hisotry=70}
+
+        School school3 = (School) ac.getBean("school3");
+        System.out.println(school3);
+        //构造参数按照下标 输出结果：School{name='国防科技大学', address='Address{province='湖南', city='长沙'}', hisotry=70}
+    }
 
 }

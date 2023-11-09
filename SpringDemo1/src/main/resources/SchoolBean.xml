@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--
+        构造注入
+        1、使用constructor-arg标签完成构造注入
+        2、构造注入方式一：根据形参名字
+        3、构造注入方式二：根据形参顺序，默认下标从0开始递增
+    -->
+    <!--根据形参名构造注入，形参的出现顺序不是必须的-->
+    <bean id="school" class="com.zyz.SpringDemo1.entity.School">
+        <constructor-arg name="name" value="国防科技大学"></constructor-arg>
+        <constructor-arg name="hisotry" value="70"></constructor-arg>
+        <constructor-arg name="address" ref="address"></constructor-arg>
+    </bean>
+
+    <bean id="school2" class="com.zyz.SpringDemo1.entity.School">
+        <constructor-arg name="address" ref="address"></constructor-arg>
+        <constructor-arg name="hisotry" value="70"></constructor-arg>
+        <constructor-arg name="name" value="国防科技大学"></constructor-arg>
+    </bean>
+
+    <!--构造注入，使用下标，出现的顺序没要求，因为已经通过下标绑定起来了-->
+    <bean id="school3" class="com.zyz.SpringDemo1.entity.School">
+        <constructor-arg index="0" value="国防科技大学"/>
+        <constructor-arg index="1" value="70"/>
+        <constructor-arg index="2" ref="address"/>
+    </bean>
+
+    <!--外部bean-->
+    <bean id="address" class="com.zyz.SpringDemo1.entity.Address">
+        <constructor-arg name="province" value="湖南"></constructor-arg>
+        <constructor-arg name="city" value="长沙"></constructor-arg>
+    </bean>
+
+</beans>
+

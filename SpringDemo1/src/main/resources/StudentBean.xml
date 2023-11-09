@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--声明Student对象-->
+    <bean id="student" class="com.zyz.SpringDemo1.entity.Student">
+        <!--
+           1、简单类型使用property和value标签给对象属性赋值
+           2、简单类型：8个基本类型+String
+           3、当spring容器加载到这一行时会在创建完对象的同时使用对象的set方法给属性赋值，底层
+              调用的是对象的set方法
+           4、spring容器调用的是setXxx()方法，而不管对象是否具有Xxx属性，Xxx不区分大小写
+       -->
+        <property name="name" value="张三"></property>
+        <property name="age" value="18"></property>
+    </bean>
+
+    <!--声明Student2对象  测试属性值是 null-->
+    <bean id="student2" class="com.zyz.SpringDemo1.entity.Student">
+        <!--
+            两种写法赋予null 值
+                第一种 value赋值 写成 null
+                第二种 不写value ,直接使用 <null/>
+         -->
+        <property name="name" value="null"></property>
+        <property name="age">
+            <null/>
+        </property>
+    </bean>
+
+    <!--声明Student3对象  测试属性值是 特殊符号-->
+    <bean id="student3" class="com.zyz.SpringDemo1.entity.Student">
+        <!--
+            属性值包含特殊符号
+                1、把<> 进行转义 &lt;&gt;
+                2、把带特殊符号内容写到 CDATA 比如：<![CDATA[<<王五>>]]>
+         -->
+        <property name="name">
+            <value><![CDATA[<<王五>>]]></value>
+        </property>
+        <property name="age">
+            <value>23</value>
+        </property>
+    </bean>
+
+</beans>
+

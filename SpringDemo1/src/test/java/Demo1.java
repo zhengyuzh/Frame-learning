@@ -176,4 +176,33 @@ public class Demo1 {
         //构造参数按照下标 输出结果：School{name='国防科技大学', address='Address{province='湖南', city='长沙'}', hisotry=70}
     }
 
+    /**
+     * 注入的方式 set方式 注入属性测试
+     *  属性的值赋予 自动装配   byType  bean对象设置成 autowire="byName"  配置文件中寻找和实体类中对应类对象一样的 值
+     */
+    @Test
+    public void TestDemo10() {
+        String config = "AutomaticAssemblyBean.xml";
+        ApplicationContext ac = new ClassPathXmlApplicationContext(config);
+        Student student = (Student) ac.getBean("student");
+        System.out.println(student);
+        //输出结果：Student{name='张三', age=18, address=Address{province='河南', city='郑州'}}
+
+    }
+
+    /**
+     * 注入的方式 set方式 注入属性测试
+     *  属性的值赋予 自动装配  byType  bean对象设置成 autowire="byType" 会在配置文件中，寻找该类型的对象
+     *  如果要测试这一部分 ，需要放开 AutomaticAssemblyBean.xml 配置文件中的 byType ，同时注释掉其它的地址对象。只留下一个，才可以正确匹配
+     */
+    @Test
+    public void TestDemo11() {
+        String config = "AutomaticAssemblyBean.xml";
+        ApplicationContext ac = new ClassPathXmlApplicationContext(config);
+        Student student2 = (Student) ac.getBean("student2");
+        System.out.println(student2);
+        //输出结果： Student{name='李四', age=24, address=Address{province='河南', city='郑州'}}
+
+    }
+
 }

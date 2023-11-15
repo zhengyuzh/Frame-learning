@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--
+        创建一个Student对象
+            1. 使用byName 自动装配  不写外部bean的情况下 对应的属性值为空
+                测试结果:Student{name='张三', age=18, address=null}
+            2.在写外部bean的情况下 外部bean 的 id  和类里边外部对象属性 一致.
+                测试结果:Student{name='张三', age=18, address=Address{province='河南', city='郑州'}}
+            3.写外部bean的情况下,但是 id 的值 和 类里外部对象属性值 不一样情况
+                测试结果:Student{name='张三', age=18, address=null}
+    -->
+    <bean id="student" class="com.zyz.SpringDemo1.entity.Student" autowire="byName">
+        <property name="name" value="张三"></property>
+        <property name="age" value="18"></property>
+    </bean>
+
+    <!--外部bean 对象  id 要和 Student 类里边 对应的 Address 对象名一致.-->
+    <bean id="address" class="com.zyz.SpringDemo1.entity.Address">
+        <property name="province" value="河南"></property>
+        <property name="city" value="郑州"></property>
+    </bean>
+
+
+    <!--使用 byType 自动装配-->
+    <!--<bean id="student2" class="com.zyz.SpringDemo1.entity.Student" autowire="byType">-->
+    <!--    <property name="name" value="李四"></property>-->
+    <!--    <property name="age" value="24"></property>-->
+    <!--</bean>-->
+
+
+
+</beans>
+

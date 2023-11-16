@@ -2,6 +2,7 @@ package com.zyz.SpringDemo1.service;
 
 import com.zyz.SpringDemo1.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 /**
@@ -21,6 +22,7 @@ public class UserService {
      *     添加注入属性注解
      */
     @Autowired  //根据类型自动装配
+    @Qualifier("userDaoImplTwo")  //根据起的名称
     private UserDao userDao;
 
     public void say(){

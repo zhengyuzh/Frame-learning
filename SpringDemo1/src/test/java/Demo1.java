@@ -225,4 +225,22 @@ public class Demo1 {
     }
 
 
+    /**
+     * @description: @Qualifier("userDaoImplTwo")  @Repository("userDaoImplTwo") //起个名称
+     *               当一个类型 有多个对象的时候。这个时候通过类型自动装配。需要 让 @Autowired 和 @Qualifier
+     *               配合使用。同时需要指定对象的名称
+     * @author: zhengyuzhu
+     * @date: 2023/11/16 9:04
+     **/
+    @Test
+    public void testDemo13(){
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("AnnotationDevelopment.xml");
+        UserService userService1 = context.getBean("userService", UserService.class);
+        userService1.say();
+        //输出结果：UserDaoImplTwo showTime ......
+        //        UserService say .......
+
+    }
+
+
 }

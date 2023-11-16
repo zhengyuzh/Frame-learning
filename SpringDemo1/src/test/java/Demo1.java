@@ -242,5 +242,20 @@ public class Demo1 {
 
     }
 
+    /**
+     * @description: 给属性赋值，不常用
+     * @author: zhengyuzhu
+     * @date: 2023/11/16 9:04
+     **/
+    @Test
+    public void testDemo14(){
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("AnnotationDevelopment.xml");
+        UserService userService1 = context.getBean("userService", UserService.class);
+        userService1.say();
+        //输出结果：UserDaoImplTwo showTime ......
+        //        UserService say .......姓名: 张三,性别: 男
+
+    }
+
 
 }

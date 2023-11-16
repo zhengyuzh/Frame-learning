@@ -228,7 +228,7 @@ public class Demo1 {
     /**
      * @description: @Qualifier("userDaoImplTwo")  @Repository("userDaoImplTwo") //起个名称
      *               当一个类型 有多个对象的时候。这个时候通过类型自动装配。需要 让 @Autowired 和 @Qualifier
-     *               配合使用。同时需要指定对象的名称
+     *               配合使用。同时需要指定对象的名称 动态代理
      * @author: zhengyuzhu
      * @date: 2023/11/16 9:04
      **/

@@ -3,6 +3,7 @@ import com.zyz.SpringDemo1.entity.School;
 import com.zyz.SpringDemo1.entity.Student;
 import com.zyz.SpringDemo1.entity.UniversityStudent;
 import com.zyz.SpringDemo1.service.PersonService;
+import com.zyz.SpringDemo1.service.UserService;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -204,5 +205,24 @@ public class Demo1 {
         //输出结果： Student{name='李四', age=24, address=Address{province='河南', city='郑州'}}
 
     }
+
+
+    /**
+     * @description:   在注解里面 value 属性值可以省略不写
+     *                 默认值是类名称，首字母小写
+     *                 UserService -- userService
+     * @author: zhengyuzhu
+     * @date: 2023/11/16 8:35
+     **/
+    @Test
+    public void testDemo2(){
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("AnnotationDevelopment.xml");
+        UserService userService1 = context.getBean("userService", UserService.class);
+        userService1.say();
+        //输出结果：UserDaoImpl showTime ......
+        //        UserService say .......
+
+    }
+
 
 }

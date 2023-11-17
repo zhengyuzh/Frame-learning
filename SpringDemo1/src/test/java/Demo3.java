@@ -2,6 +2,8 @@ import com.zyz.SpringDemo2.entity.Student;
 import com.zyz.SpringDemo2.mapper.StudentMapper;
 import com.zyz.SpringDemo2.service.IStudentService;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -16,6 +18,7 @@ import java.util.List;
  * @Version: 1.0
  */
 public class Demo3 {
+    private static final Logger log = LoggerFactory.getLogger(Demo3.class);
 
     //执行查询全部，不使用service
     @Test
@@ -45,4 +48,16 @@ public class Demo3 {
         service.addStudent(student);
 
     }
+
+    //测试日志
+    @Test
+    public void test04() {
+        log.info("测试日志打印");
+        log.warn("警告信息");
+        log.error("错误信息");
+
+    }
+
+
+
 }

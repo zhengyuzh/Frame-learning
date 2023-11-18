@@ -49,4 +49,19 @@ public class Demo4 {
         System.out.println("查询商品编号为: " + goodsId + ",的商品信息: " + goods);
         //输出结果如下: 查询商品编号为: 1001,的商品信息: Goods{id=1001, name='茶杯', amount=10, price=13.6}
     }
+
+
+    // 使用配置文件 AspectJ  测试这个方式的时候 需要将 @Transactional 事务注解 注释掉
+    @Test
+    public void test03() {
+        String config = "TransactionApplication.xml";
+        ApplicationContext ac = new ClassPathXmlApplicationContext(config);
+        //获取service对象
+        IBuyGoodsService service = (IBuyGoodsService) ac.getBean("buyGoodsService");
+
+        //商品库存不足情况
+        //com.zyz.SpringDemo3.service.impl.NotEnoughException: 编号为:1002商品库存不足...
+        service.buy(1002,100);
+
+    }
 }

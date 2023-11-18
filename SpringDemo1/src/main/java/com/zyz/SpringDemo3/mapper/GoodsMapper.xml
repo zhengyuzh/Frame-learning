@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zyz.SpringDemo3.mapper.GoodsMapper">
+    <!--更新商品信息-->
+    <update id="updateGoods" parameterType="Goods">
+        update goods set amount = amount - #{amount} where id = #{id}
+    </update>
+    <!--查询商品信息-->
+    <select id="queryGoods" resultType="Goods">
+        select * from goods where id = #{id}
+    </select>
+</mapper>

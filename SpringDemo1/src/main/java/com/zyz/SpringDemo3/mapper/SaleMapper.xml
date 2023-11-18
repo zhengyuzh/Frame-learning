@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zyz.SpringDemo3.mapper.SaleMapper">
+    <!--增加销售记录-->
+    <insert id="addSale" parameterType="Sale">
+        insert into sale (gid,nums) values (#{gid},#{nums})
+    </insert>
+</mapper>

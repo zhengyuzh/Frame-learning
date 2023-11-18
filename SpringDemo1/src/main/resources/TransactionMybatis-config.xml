@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <typeAliases>
+        <!--
+            批量设置别名，会自动的将该包下的所有类定义了别名，别名就是其自身且不区分大小
+        -->
+        <package name="com.zyz.SpringDemo3.entity" />
+    </typeAliases>
+    <!--加载映射配置文件-->
+    <mappers>
+        <mapper resource="com/zyz/SpringDemo3/mapper/GoodsMapper.xml"></mapper>
+        <mapper resource="com/zyz/SpringDemo3/mapper/SaleMapper.xml"></mapper>
+    </mappers>
+
+
+</configuration>

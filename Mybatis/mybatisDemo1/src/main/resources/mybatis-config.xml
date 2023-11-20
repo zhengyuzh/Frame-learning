@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!--configuration core file-->
+<configuration>
+    <!--批量设置别名，会自动的将该包下的所有类定义了别名，别名就是其自身且不区分大小-->
+    <typeAliases>
+        <package name="com.zyz.mybatis.entity" />
+    </typeAliases>
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/spring_test?serverTimezone=UTC&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;useSSL=false"/>
+                <property name="username" value="root"/>
+                <property name="password" value="root"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!--加载映射配置文件-->
+    <mappers>
+        <mapper resource="com/zyz/mybatis/mapper/StudentMapper.xml"/>
+    </mappers>
+</configuration>

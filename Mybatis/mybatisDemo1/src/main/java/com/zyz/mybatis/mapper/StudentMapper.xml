@@ -4,14 +4,55 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zyz.mybatis.mapper.StudentMapper">
 
+
+    <!--通过对象更新数据-->
+    <update id="updateStudent" parameterType="Student">
+        update student
+        set stuNo   = #{stuNo},
+            stuName = #{stuName},
+            cardid  = #{cardID},
+            classid = #{classID}
+        where stuNo = #{stuNo}
+    </update>
+
+    <!--通过map更新数据-->
+    <update id="updateStudentMap" parameterType="map">
+        update student
+        set stuNo   = #{stuNo},
+            stuName = #{stuName},
+            cardid  = #{cardid},
+            classid = #{classid}
+        where stuNo = #{stuNo}
+    </update>
+
+    <!--通过学号删除学生-->
+    <delete id="deleteStudentById">
+        delete
+        from student
+        where stuNo = #{stuNo}
+    </delete>
+
     <!--查询全部-->
     <select id="queryAll" resultType="Student">
-        select * from student
+        select *
+        from student
+    </select>
+
+    <!--通过学号 查询学生-->
+    <select id="queryStudentById" resultType="com.zyz.mybatis.entity.Student">
+        select *
+        from student
+        where stuNo = #{stuNo}
+    </select>
+
+    <!--模糊查询-->
+    <select id="getStudentLike" resultType="com.zyz.mybatis.entity.Student">
+        select * from student where stuname like "%"#{value}"%"
     </select>
 
     <!--新增学生-->
     <insert id="addStudent" parameterType="Student">
-        insert into student (stuno,stuname,cardid,classid)
-        values (#{stuNo},#{stuName},#{cardID},#{classID})
+        insert into student (stuno, stuname, cardid, classid)
+        values (#{stuNo}, #{stuName}, #{cardID}, #{classID})
     </insert>
 </mapper>

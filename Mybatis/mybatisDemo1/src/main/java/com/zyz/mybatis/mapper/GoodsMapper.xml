@@ -36,5 +36,16 @@
         <result column="price" property="goods_Price" />
     </resultMap>
 
+    <!--分页查询数据-->
+    <select id="queryGoodsLimit" resultMap="GoodsMap">
+        select *
+        from goods limit #{startIndex},#{pageSize}
+    </select>
+
+    <!--使用 RowBounds 分页-->
+    <select id="queryGoodsByRowBounds" resultMap="GoodsMap">
+        select * from goods
+    </select>
+
 
 </mapper>

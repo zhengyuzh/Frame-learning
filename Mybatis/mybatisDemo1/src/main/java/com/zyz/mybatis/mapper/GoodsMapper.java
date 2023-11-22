@@ -2,6 +2,9 @@ package com.zyz.mybatis.mapper;
 
 import com.zyz.mybatis.entity.Goods;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * @BelongsProject: Mybatis
  * @BelongsPackage: com.zyz.mybatis.mapper
@@ -20,4 +23,22 @@ public interface GoodsMapper {
      * @return: com.zyz.mybatis.entity.Goods
      **/
     Goods queryGoodsById(Integer id);
+
+    /**
+     * @description: 使用 limit 分页查询数据
+     * @author: zhengyuzhu
+     * @date: 2023/11/22 10:56
+     * @param: map
+     * @return: java.util.List<com.zyz.mybatis.entity.Goods>
+     **/
+    List<Goods> queryGoodsLimit(Map<String,Object> map);
+
+    /**
+     * @description: 使用 RowBounds 分页
+     * @author: zhengyuzhu
+     * @date: 2023/11/22 11:12
+     * @return: java.util.List<com.zyz.mybatis.entity.Goods>
+     **/
+    List<Goods> queryGoodsByRowBounds();
+
 }

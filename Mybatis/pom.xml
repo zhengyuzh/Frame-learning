@@ -10,6 +10,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>mybatisDemo1</module>
+        <module>mybatisDemo2</module>
     </modules>
 
     <properties>

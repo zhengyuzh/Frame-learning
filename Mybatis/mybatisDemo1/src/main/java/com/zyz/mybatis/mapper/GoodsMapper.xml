@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zyz.mybatis.mapper.GoodsMapper">
+
+    <!--
+    1、数据字段对应不上，查询信息
+    <select id="queryGoodsById" resultType="com.zyz.mybatis.entity.Goods">
+           select *
+           from goods
+           where id = #{id}
+    </select>
+
+    2、通过给字段起别名解决
+    <select id="queryGoodsById" resultType="com.zyz.mybatis.entity.Goods">
+           select id,name as goods_Name,amount as goods_Amount,price as goods_Price
+           from goods
+           where id = #{id}
+    </select>
+
+    3、通过结果集映射
+     -->
+    <select id="queryGoodsById" resultMap="GoodsMap">
+           select *
+           from goods
+           where id = #{id}
+    </select>
+
+    <!--  结果集映射  -->
+    <resultMap id="GoodsMap" type="Goods">
+        <!--column数据库中的字段，property实体类中的属性-->
+        <result column="id" property="id" />
+        <result column="name" property="goods_Name" />
+        <result column="amount" property="goods_Amount" />
+        <result column="price" property="goods_Price" />
+    </resultMap>
+
+
+</mapper>

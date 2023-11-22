@@ -84,6 +84,7 @@
     <!-- 1、使用相对于类路径的资源引用 -->
     <mappers>
         <mapper resource="com/zyz/mybatis/mapper/StudentMapper.xml"/>
+        <mapper resource="com/zyz/mybatis/mapper/GoodsMapper.xml"/>
     </mappers>
 
     <!--

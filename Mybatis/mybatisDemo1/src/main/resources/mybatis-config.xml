@@ -121,6 +121,7 @@
     <mappers>
         <mapper resource="com/zyz/mybatis/mapper/StudentMapper.xml"/>
         <mapper resource="com/zyz/mybatis/mapper/GoodsMapper.xml"/>
+        <mapper class="com.zyz.mybatis.mapper.UserMapper"/>
     </mappers>
 
     <!--

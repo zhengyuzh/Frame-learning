@@ -16,6 +16,17 @@
     </properties>
 
     <!--
+        这是 MyBatis 中极为重要的调整设置，它们会改变 MyBatis 的运行时行为。
+        下表描述了设置中各项设置的含义、默认值等。
+        logImpl	指定 MyBatis 所用日志的具体实现，未指定时将自动查找。
+        SLF4J | LOG4J（3.5.9 起废弃） | LOG4J2 | JDK_LOGGING | COMMONS_LOGGING | STDOUT_LOGGING | NO_LOGGING
+    -->
+    <settings>
+        <setting name="logImpl" value="LOG4J"/>
+    </settings>
+
+
+    <!--
         1、可以给实体类起别名
              <typeAliases>
                  <typeAlias type="com.zyz.mybatis.entity.Student" alias="student" />

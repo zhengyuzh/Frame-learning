@@ -1,12 +1,10 @@
 import com.zyz.mybatis.entity.Goods;
-import com.zyz.mybatis.entity.Student;
 import com.zyz.mybatis.mapper.GoodsMapper;
-import com.zyz.mybatis.mapper.StudentMapper;
 import com.zyz.mybatis.utils.MybatisUtils;
 import org.apache.ibatis.session.SqlSession;
+import org.apache.log4j.Logger;
 import org.junit.Test;
 
-import java.util.List;
 
 /**
  * @BelongsProject: Mybatis
@@ -17,7 +15,7 @@ import java.util.List;
  * @Version: 1.0
  */
 public class TestGoods {
-
+    static Logger logger = Logger.getLogger(TestGoods.class);
     /**
      * @description: 测试查询商品信息 数据库字段 和 实体类字段不一致问题
      * @author: zhengyuzhu
@@ -60,5 +58,17 @@ public class TestGoods {
          *  Goods{id=1001, goods_Name='茶杯', goods_Amount=10, goods_Price=13.6}
          *
          **/
+    }
+
+    /**
+     * @description: 测试日志打印
+     * @author: zhengyuzhu
+     * @date: 2023/11/22 10:03
+     **/
+    @Test
+    public void testDemo2(){
+        logger.info("INFO   日志测试");
+        logger.debug("DEBUG 日志测试");
+        logger.error("ERROR 日志测试");
     }
 }

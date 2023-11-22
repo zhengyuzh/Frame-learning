@@ -2,7 +2,14 @@
 <!DOCTYPE configuration
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
-<!--configuration core file-->
+<!--
+    plugins在配置文件中的位置必须符合要求，否则会报错，顺序如下:
+    properties?, settings?,
+    typeAliases?, typeHandlers?,
+    objectFactory?,objectWrapperFactory?,
+    plugins?,
+    environments?, databaseIdProvider?, mappers?
+-->
 
 <configuration>
     <!--
@@ -38,6 +45,24 @@
         <package name="com.zyz.mybatis.entity" />
     </typeAliases>
 
+    <plugins>
+        <!-- com.github.pagehelper为PageHelper类所在包名 -->
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+            <!--
+                使用下面的方式配置参数
+                helperDialect：分页插件会自动检测当前的数据库链接，自动选择合适的分页方式。
+                你可以配置helperDialect属性来指定分页插件使用哪种方言 配置时，可以使用下面的缩写值：
+                oracle,mysql,mariadb,sqlite,hsqldb,postgresql,db2,sqlserver,informix,h2,sqlserver2012,derby
+
+                reasonable：分页合理化参数，默认值为false。当该参数设置为 true 时，pageNum<=0 时会查询第一页， pageNum>pages（超过总数时），会查询最后一页。
+                默认false 时，直接根据参数进行查询。
+                更多参数配置：参考官网
+            -->
+            <property name="helperDialect" value="mysql"/>
+            <property name="reasonable" value="true"/>
+
+        </plugin>
+    </plugins>
 
     <!--
         MyBatis 可以配置成适应多种环境，这种机制有助于将 SQL 映射应用于多种数据库之中， 现实情况下有多种理由需要这么做。

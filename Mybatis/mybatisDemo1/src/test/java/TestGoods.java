@@ -1,3 +1,6 @@
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.zyz.mybatis.entity.Goods;
 import com.zyz.mybatis.mapper.GoodsMapper;
 import com.zyz.mybatis.utils.MybatisUtils;
@@ -143,5 +146,55 @@ public class TestGoods {
          **/
     }
 
+
+
+    /**
+     * @description: 3、使用分页插件
+     * @author: zhengyuzhu
+     * @date: 2023/11/22 13:43
+     **/
+    @Test
+    public void testDemo5(){
+        //第一步：获得SqlSession对象
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        // PageHelper.startPage()对即将到来的下一次查询进行分页处理；
+        // 比如下面就是第1页，每页2条数据；
+        PageHelper.startPage(1, 2);
+        GoodsMapper goodsMapper = sqlSession.getMapper(GoodsMapper.class);
+        List<Goods> goodsList = goodsMapper.queryGoodByPlugin();
+       //用PageInfo对结果进行包装
+        PageInfo page = new PageInfo(goodsList);
+        System.out.println("总页数："+page.getPages());
+        System.out.println("总记录数："+page.getTotal());
+        System.out.println("开始行号："+page.getStartRow());
+        System.out.println("结束行号："+page.getEndRow());
+        System.out.println("当前页码："+page.getPageNum());
+
+        List<Goods> goodsListRs = page.getList();
+
+        for(Goods goods : goodsListRs){
+            logger.info(goods);
+        }
+        //关闭SqlSession
+        sqlSession.close();
+
+        /**
+         *  输出如下 :
+         *
+         [com.zyz.mybatis.mapper.GoodsMapper.queryGoodByPlugin_COUNT]-==>  Preparing: SELECT count(0) FROM goods
+         [com.zyz.mybatis.mapper.GoodsMapper.queryGoodByPlugin_COUNT]-==> Parameters:
+         [com.zyz.mybatis.mapper.GoodsMapper.queryGoodByPlugin_COUNT]-<==      Total: 1
+         [com.zyz.mybatis.mapper.GoodsMapper.queryGoodByPlugin]-==>  Preparing: select * from goods LIMIT ?
+         [com.zyz.mybatis.mapper.GoodsMapper.queryGoodByPlugin]-==> Parameters: 2(Integer)
+         [com.zyz.mybatis.mapper.GoodsMapper.queryGoodByPlugin]-<==      Total: 2
+         总页数：2
+         总记录数：4
+         开始行号：1
+         结束行号：2
+         当前页码：1
+         [TestGoods]-Goods{id=1001, goods_Name='茶杯', goods_Amount=10, goods_Price=13.6}
+         [TestGoods]-Goods{id=1002, goods_Name='茶壶', goods_Amount=10, goods_Price=15.9}
+         **/
+    }
 
 }

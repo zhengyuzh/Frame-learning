@@ -41,4 +41,12 @@ public interface GoodsMapper {
      **/
     List<Goods> queryGoodsByRowBounds();
 
+    /**
+     * @description: 使用 分页插件
+     * @author: zhengyuzhu
+     * @date: 2023/11/22 13:40
+     * @return: java.util.List<com.zyz.mybatis.entity.Goods>
+     **/
+    List<Goods> queryGoodByPlugin();
+
 }

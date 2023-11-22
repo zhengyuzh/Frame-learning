@@ -46,6 +46,10 @@
     <select id="queryGoodsByRowBounds" resultMap="GoodsMap">
         select * from goods
     </select>
+    <!--使用分页插件-->
+    <select id="queryGoodByPlugin" resultMap="GoodsMap">
+        select * from goods
+    </select>
 
 
 </mapper>

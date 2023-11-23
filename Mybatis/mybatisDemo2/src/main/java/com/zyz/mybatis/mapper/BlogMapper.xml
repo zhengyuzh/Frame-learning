@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zyz.mybatis.mapper.BlogMapper">
+
+    <!--将功能相同的部分抽取出来，方便复用-->
+    <sql id="if-title-author">
+        <if test="title != null">
+            title = #{title}
+        </if>
+        <if test="author != null">
+            and author = #{author}
+        </if>
+    </sql>
+
+    <!--复用 SQL代码片段的方式-->
+    <select id="queryBlogIFThree" parameterType="map" resultMap="BlogMap">
+        select * from blog
+        <where>
+            <include refid="if-title-author"></include>
+        </where>
+    </select>
+
+
+    <!--  结果集映射  -->
+    <resultMap id="BlogMap" type="Blog">
+        <!--column数据库中的字段，property实体类中的属性-->
+        <result column="id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="author" property="author"/>
+        <result column="create_time" property="createTime"/>
+        <result column="views" property="views"/>
+    </resultMap>
+
+
+    <!--IF的使用 查询博客-->
+    <select id="queryBlogIF" parameterType="map" resultMap="BlogMap">
+        select * from blog where 1=1
+        <if test="title != null">
+            and title = #{title}
+        </if>
+        <if test="author != null">
+            and author = #{author}
+        </if>
+    </select>
+
+    <!--choose (when, otherwise)的使用 查询博客-->
+    <select id="queryBlogChoose" parameterType="map" resultMap="BlogMap">
+        select * from blog
+        <where>
+            <choose>
+                <when test="title != null">
+                    title = #{title}
+                </when>
+                <when test="author != null">
+                    and author = #{author}
+                </when>
+                <otherwise>
+                    and views = #{views}
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+
+    <!--trim (where, set)的使用 查询-->
+    <select id="queryBlogIFTwo" parameterType="map" resultMap="BlogMap">
+        select * from blog
+        <where>
+            <if test="title != null">
+                and title = #{title}
+            </if>
+            <if test="author != null">
+                and author = #{author}
+            </if>
+        </where>
+
+    </select>
+
+    <!--trim (where, set)的使用 修改-->
+    <update id="updateBlog" parameterType="map">
+        update blog
+        <set>
+            <if test="title != null">
+                title = #{title},
+            </if>
+            <if test="author != null">
+                author = #{author}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+
+    <!--
+
+    foreach元素的属性主要有item，index，collection，open，separator，close。
+        ● item：集合中元素迭代时的别名，该参数为必选。
+        ● index：在list和数组中,index是元素的序号，在map中，index是元素的key，该参数可选
+        ● open：foreach代码的开始符号，一般是(和close=")"合用。常用在in(),values()时。该参数可选
+        ● separator：元素之间的分隔符，例如在in()的时候，separator=","会自动在元素中间用“,“隔开，避免手动输入逗号导致sql错误，如in(1,2,)这样。该参数可选。
+        ● close: foreach代码的关闭符号，一般是)和open="("合用。常用在in(),values()时。该参数可选。
+        ● collection: 要做foreach的对象，作为入参时，List对象默认用"list"代替作为键，数组对象有"array"代替作为键，Map对象没有默认的键。
+        当然在作为入参时可以使用@Param("keyName")来设置键，设置keyName后，list,array将会失效。 除了入参这种情况外，还有一种作为参数对象的某个字段的时候。
+        举个例子：如果User有属性List ids。入参是User对象，那么这个collection = "ids".如果User有属性Ids ids;其中Ids是个对象，Ids有个属性List id;
+        入参是User对象，那么collection = "ids.id"
+
+
+        select * from blog where 1=1 and (id=1 or id=2 or id=3)
+        我们现在传递一个万能的map，这map中可以存在一个集合！
+    -->
+    <select id="queryBlogForeach" parameterType="map" resultMap="BlogMap">
+        select * from blog
+        <where>
+            <foreach collection="ids" item="id" open="and (" close=")" separator="or">
+                id = #{id}
+            </foreach>
+        </where>
+    </select>
+
+
+</mapper>

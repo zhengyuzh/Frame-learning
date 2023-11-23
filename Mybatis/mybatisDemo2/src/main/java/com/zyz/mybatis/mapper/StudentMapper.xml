@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zyz.mybatis.mapper.StudentMapper">
+
+    <!--
+        1、按照结果集嵌套处理
+            这里重点说一下 这个结果集映射。如果对查询出来的数据字段 起了 别名。则映射的时候 要用这个别名。
+    -->
+    <resultMap id="StudentMap" type="Student">
+        <!--这里的column是与查询结果的字段名对应，字段重命名了则对应命名后的字段-->
+        <result property="id" column="sid"/>
+        <result property="name" column="sname"/>
+        <!--复杂的属性需要单独处理 对象：association  集合：collection-->
+        <association property="teacher" javaType="Teacher">
+            <result property="name" column="tname"/>
+            <result property="id" column="tid"/>
+        </association>
+    </resultMap>
+
+    <!--查询学生-->
+    <select id="getStudent" resultMap="StudentMap">
+        select s.id sid,s.name sname,t.name tname,s.tid tid
+        from tb_student s
+        join tb_teacher t
+        on s.tid = t.id
+    </select>
+
+
+    <!--
+        2、 按照查询嵌套处理
+    -->
+
+    <select id="getStudent2" resultMap="StudentMap2">
+        select *  from tb_student;
+    </select>
+
+    <select id="getTeacher" resultType="Teacher">
+        select * from tb_teacher where id = #{tid};
+    </select>
+
+    <!--这里将学生和对应老师分开查询，将查询结果组合-->
+    <resultMap id="StudentMap2" type="Student">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <association property="teacher" column="tid" javaType="Teacher" select="getTeacher"/>
+    </resultMap>
+</mapper>

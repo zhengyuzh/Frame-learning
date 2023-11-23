@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zyz.mybatis.mapper.TeacherMapper">
+
+    <!--
+        1、 按结果嵌套查询
+    -->
+    <select id="getTeacherById" resultMap="TeacherById">
+        select t.id id, t.name tname, s.id sid,s.name sname,s.tid tid
+        from tb_teacher t
+                 join tb_student s
+                      on t.id = s.tid;
+    </select>
+
+    <resultMap id="TeacherById" type="TeacherT">
+        <result property="id" column="id"/>
+        <result property="name" column="tname"/>
+        <!--获取List<Student>中的泛型使用 ofType-->
+        <collection property="studentTs" ofType="StudentT" javaType="java.util.List">
+            <result property="id" column="sid"/>
+            <result property="name" column="sname"/>
+            <result property="tid" column="tid"/>
+        </collection>
+    </resultMap>
+
+    <!--
+         2、按照查询嵌套处理
+    -->
+    <select id="getTeacher2" resultMap="TeacherStudent2">
+        select * from tb_teacher where id = #{tid}
+    </select>
+
+    <resultMap id="TeacherStudent2" type="TeacherT">
+        <result property="id" column="id"/>
+        <collection property="studentTs" javaType="java.util.List" ofType="StudentT" select="getStudentByTeacherId" column="id"/>
+    </resultMap>
+
+    <select id="getStudentByTeacherId" resultType="StudentT">
+        select * from  tb_student where tid = #{tid}
+    </select>
+
+
+</mapper>

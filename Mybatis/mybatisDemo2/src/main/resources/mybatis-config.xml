@@ -43,6 +43,7 @@
     -->
     <typeAliases>
         <package name="com.zyz.mybatis.entity" />
+        <package name="com.zyz.mybatis.vo" />
     </typeAliases>
 
     <plugins>
@@ -119,6 +120,8 @@
     -->
     <!-- 1、使用映射器接口实现类的完全限定类名 -->
     <mappers>
+        <mapper resource="com/zyz/mybatis/mapper/StudentMapper.xml"/>
+        <mapper resource="com/zyz/mybatis/mapper/TeacherMapper.xml"/>
         <mapper class="com.zyz.mybatis.mapper.UserMapper"/>
     </mappers>
 

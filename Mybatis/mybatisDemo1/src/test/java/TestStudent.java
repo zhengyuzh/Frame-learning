@@ -1,9 +1,13 @@
 import com.zyz.mybatis.entity.Student;
 import com.zyz.mybatis.mapper.StudentMapper;
 import com.zyz.mybatis.utils.MybatisUtils;
+import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.Test;
 
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 
@@ -237,6 +241,7 @@ public class TestStudent {
         System.out.println("-----------------");
         Student student1 = studentMapper.queryStudentById(1);
         System.out.println(student1);
+        System.out.println("是否是同一个对象:" + (student1 == student));
 
         //关闭SqlSession
         sqlSession.close();
@@ -252,6 +257,7 @@ public class TestStudent {
          * Student{stuNo=1, stuName='张三', cardID=1115, classID=1}
          * -----------------
          * Student{stuNo=1, stuName='张三', cardID=1115, classID=1}
+         * 是否是同一个对象:true
          * [org.apache.ibatis.transaction.jdbc.JdbcTransaction]-Resetting autocommit to true on JDBC Connection [com.mysql.jdbc.JDBC4Connection@145eaa29]
          * [org.apache.ibatis.transaction.jdbc.JdbcTransaction]-Closing JDBC Connection [com.mysql.jdbc.JDBC4Connection@145eaa29]
          *
@@ -422,5 +428,75 @@ public class TestStudent {
 
     }
 
+    /**
+     * @description: 二级缓存 创建两个sqlSession
+     * @author: zhengyuzhu
+     * @date: 2023/11/23 15:51
+     **/
+    @Test
+    public void test11(){
+        SqlSessionFactory sqlSessionFactory = null;
+        try {
+            //使用Mybatis第一步：获取sqlSessionFactory对象
+            String resource = "mybatis-config.xml";
+            InputStream inputStream = Resources.getResourceAsStream(resource);
+            sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        //第一步：获得SqlSession对象
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        //方式一：getMapper
+        StudentMapper studentMapper = sqlSession.getMapper(StudentMapper.class);
+        Student student1 = studentMapper.queryStudentById(1);
+
+        System.out.println("第1次查询：" + student1);
+        Student student2 = studentMapper.queryStudentById(1);
+        System.out.println("第2次查询：" + student2);
+        // 效果：查出的数据首先放在一级缓存中，只有一级缓存被关闭或者提交以后，
+        //      一级缓存数据才会转移到二级缓存
+        sqlSession.commit();
+
+
+        System.out.println("二级缓存观测点");
+        SqlSession sqlSession2 = sqlSessionFactory.openSession();
+        StudentMapper studentMapper2 = sqlSession2.getMapper(StudentMapper.class);
+
+        Student student3 = studentMapper2.queryStudentById(1);
+
+        System.out.println("第一次执行:"+ student3);
+        Student student4 = studentMapper2.queryStudentById(1);
+        System.out.println("第2次执行:"+ student4);
+        sqlSession2.commit();
+        System.out.println("四个对象是否相同：" + ((student1 == student2) && (student3 == student4) &&(student1 == student4)));
+
+        //关闭SqlSession
+        sqlSession.close();
+        sqlSession2.close();
+        /**
+         *   二级缓存开启
+         *
+         * [org.apache.ibatis.transaction.jdbc.JdbcTransaction]-Opening JDBC Connection
+         * [org.apache.ibatis.datasource.pooled.PooledDataSource]-Created connection 921760190.
+         * [org.apache.ibatis.transaction.jdbc.JdbcTransaction]-Setting autocommit to false on JDBC Connection [com.mysql.jdbc.JDBC4Connection@36f0f1be]
+         * [com.zyz.mybatis.mapper.StudentMapper.queryStudentById]-==>  Preparing: select * from student where stuNo = ?
+         * [com.zyz.mybatis.mapper.StudentMapper.queryStudentById]-==> Parameters: 1(Integer)
+         * [com.zyz.mybatis.mapper.StudentMapper.queryStudentById]-<==      Total: 1
+         * 第1次查询：Student{stuNo=1, stuName='张三', cardID=1115, classID=1}
+         * [com.zyz.mybatis.mapper.StudentMapper]-Cache Hit Ratio [com.zyz.mybatis.mapper.StudentMapper]: 0.0
+         * 第2次查询：Student{stuNo=1, stuName='张三', cardID=1115, classID=1}
+         * 二级缓存观测点
+         * [com.zyz.mybatis.mapper.StudentMapper]-Cache Hit Ratio [com.zyz.mybatis.mapper.StudentMapper]: 0.3333333333333333
+         * 第一次执行:Student{stuNo=1, stuName='张三', cardID=1115, classID=1}
+         * [com.zyz.mybatis.mapper.StudentMapper]-Cache Hit Ratio [com.zyz.mybatis.mapper.StudentMapper]: 0.5
+         * 第2次执行:Student{stuNo=1, stuName='张三', cardID=1115, classID=1}
+         * 四个对象是否相同：true
+         * [org.apache.ibatis.transaction.jdbc.JdbcTransaction]-Resetting autocommit to true on JDBC Connection [com.mysql.jdbc.JDBC4Connection@36f0f1be]
+         * [org.apache.ibatis.transaction.jdbc.JdbcTransaction]-Closing JDBC Connection [com.mysql.jdbc.JDBC4Connection@36f0f1be]
+         **/
+
+    }
 
 }

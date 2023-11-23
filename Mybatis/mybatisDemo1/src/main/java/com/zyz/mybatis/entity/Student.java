@@ -1,5 +1,7 @@
 package com.zyz.mybatis.entity;
 
+import java.io.Serializable;
+
 /**
  * @BelongsProject: SpringDemo1
  * @BelongsPackage: com.zyz.SpringDemo2.entity
@@ -8,7 +10,7 @@ package com.zyz.mybatis.entity;
  * @Description: TODO
  * @Version: 1.0
  */
-public class Student {
+public class Student implements Serializable {
     private int stuNo;
     private String stuName;
     private int cardID;

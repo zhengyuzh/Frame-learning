@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <style type="text/css">
+        a{
+            text-decoration: none;
+            color: black;
+            font-size: 18px;
+        }
+        h3{
+
+            width: 180px;
+            height: 38px;
+            margin:100px auto;
+            text-align: center;
+            line-height: 38px;
+            background: deepskyblue;
+            border-radius: 5px;
+
+        }
+
+    </style>
+</head>
+<body>
+
+<h3>
+    <a th:href="@{/employee}">查看所有员工信息</a><br>
+</h3>
+
+<h3>
+    <a th:href="@{/addEmployee}">添加员工</a>
+</h3>
+
+
+</body>
+</html>

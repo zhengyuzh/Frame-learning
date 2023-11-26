@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>员工信息</title>
+    <style type="text/css">
+        a {
+            text-decoration: none;
+        }
+    </style>
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div class="page-header">
+                <h1>
+                    <small>员工信息----------显示所有员工信息</small>
+                </h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="row ">
+        <div class="col-md-4 column">
+            <a class="btn btn-primary btn-sm" th:href="@{/addEmployee}">添加员工</a>
+
+        </div>
+
+        <div class="col-md-4 column">
+
+        </div>
+
+    </div>
+
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <table id="mydataTable" class="table table-hover table-striped">
+                <thead>
+                <tr>
+                    <th>编号</th>
+                    <th>姓名</th>
+                    <th>邮箱</th>
+                    <th>性别</th>
+                    <th colspan="2">操作</th>
+                </tr>
+                </thead>
+                <!--查询用户处理-->
+                <tbody>
+                <tr th:each="employee : ${employeeList}">
+                    <td th:text="${employee.id}"></td>
+                    <td th:text="${employee.lastName}"></td>
+                    <td th:text="${employee.email}"></td>
+                    <td>
+                        <div th:switch="${employee.gender}">
+                            <span th:case="1">男</span>
+                            <span th:case="0">女</span>
+                        </div>
+                    </td>
+                    <td>
+                        <a class="btn btn-danger btn-xs" @click="deleteEmployee"
+                           th:href="@{'/employee/'+${employee.id}}">删除</a>
+                        <a class="btn btn-primary btn-xs" th:href="@{'/employee/'+${employee.id}}">修改</a>
+
+                    </td>
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+
+<!--<a th:href="@{/addEmployee}">添加员工</a>-->
+<!--<table id="dataTable" border="1" cellpadding="0" cellspacing="0" style="text-align: center">-->
+<!--    <tr>-->
+<!--        <th colspan="6">员工 信息</th>-->
+<!--    </tr>-->
+<!--    <tr>-->
+<!--        <th>编号</th>-->
+<!--        <th>姓名</th>-->
+<!--        <th>邮箱</th>-->
+<!--        <th>性别</th>-->
+<!--        <th colspan="2">操作</th>-->
+<!--    </tr>-->
+<!--    <tr th:each="employee : ${employeeList}">-->
+<!--        <td th:text="${employee.id}"></td>-->
+<!--        <td th:text="${employee.lastName}"></td>-->
+<!--        <td th:text="${employee.email}"></td>-->
+<!--        <td th:text="${employee.gender}"></td>-->
+<!--        <td>-->
+<!--            <a @click="deleteEmployee" th:href="@{'/employee/'+${employee.id}}">delete</a>-->
+<!--            <a th:href="@{'/employee/'+${employee.id}}">update</a>-->
+
+<!--        </td>-->
+
+<!--    </tr>-->
+<!--</table>-->
+
+<form id="deleteForm" method="post">
+    <input type="hidden" name="_method" value="DELETE">
+</form>
+
+<script type="text/javascript" th:src="@{/static/js/vue.js}"></script>
+<script type="text/javascript">
+    var vue = new Vue({
+        el: "#mydataTable",
+        methods: {
+            deleteEmployee: function (event) {
+                var deleteForm = document.getElementById("deleteForm");
+                deleteForm.action = event.target.href;
+                deleteForm.submit();
+                event.preventDefault();
+            }
+        }
+
+    })
+</script>
+
+</body>
+</html>

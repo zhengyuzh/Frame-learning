@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>修改</title>
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+
+<div class="container">
+
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div class="page-header">
+                <h1>
+                    <small>修改信息</small>
+                </h1>
+            </div>
+        </div>
+    </div>
+    <form th:action="@{/employee}" method="post">
+        <input type="hidden" name="_method" value="put">
+        <input type="hidden" name="id" th:value="${employee.id}">
+
+        <div class="form-group">
+            <label>姓名</label>
+            <input type="text" class="form-control" name="lastName" th:value="${employee.lastName}">
+            <!--        <input type="text" class="form-control" name="bookName" value="${QBook.bookName}" required>-->
+        </div>
+        <div class="form-group">
+            <label>邮箱</label>
+            <input type="text" class="form-control" name="email" th:value="${employee.email}">
+            <!--        <input type="text" class="form-control" name="bookCounts" value="${QBook.bookCounts}" required>-->
+        </div>
+
+        <div class="form-group">
+            <label >性别 </label>
+            <input type="radio" name="gender" value="1" th:field="${employee.gender}">男
+
+
+            <input type="radio" name="gender" value="0" th:field="${employee.gender}">女
+
+        </div>
+
+        <!--        <input type="text" class="form-control" name="detail" value="${QBook.detail}" required>-->
+
+
+        <input type="submit" class="btn btn-default" value="保存">
+
+    </form>
+</div>
+</div>
+
+
+<!--<form th:action="@{/employee}" method="post">-->
+<!--    <input type="hidden" name="_method" value="put">-->
+<!--    <input type="hidden" name="id" th:value="${employee.id}">-->
+<!--    姓名:<input type="text" name="lastName" th:value="${employee.lastName}"><br>-->
+<!--    邮箱:<input type="text" name="email" th:value="${employee.email}"><br>-->
+<!--    性别:<input type="radio" name="gender" value="1" th:field="${employee.gender}">男-->
+<!--         <input type="radio" name="gender" value="0" th:field="${employee.gender}">女-->
+<!--    <input type="submit" value="update">-->
+<!--</form>-->
+
+</body>
+</html>

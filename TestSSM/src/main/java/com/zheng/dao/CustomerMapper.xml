@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zheng.dao.CustomerMapper">
+
+
+    <!--    增加一个顾客信息-->
+    <insert id="addCustomer" parameterType="com.zheng.pojo.Customer">
+        insert into customer (usercount, name, sex, age, email, tel, address)
+        values (#{usercount}, #{name}, #{sex}, #{age}, #{email}, #{tel}, #{address})
+
+    </insert>
+
+    <!--    根据顾客账号查询顾客信息-->
+    <select id="queryCustomerById" resultType="customer">
+        select *
+        from customer
+        where usercount = #{usercount}
+    </select>
+
+    <!--    查询用户的所有信息-->
+
+    <select id="queryAllCustomer" resultType="customer">
+        select *
+        from customer
+    </select>
+
+    <!--    删除一个客户信息通过账户-->
+    <delete id="deleteCustomer">
+        delete
+        from customer
+        where usercount = #{usercount}
+    </delete>
+
+
+</mapper>

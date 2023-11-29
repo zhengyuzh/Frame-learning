@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!--配置数据源 交给spring去做-->
+
+    <typeAliases>
+        <!--批量设置别名，会自动的将该包下的所有类定义了别名，别名就是其自身且不区分大小-->
+        <typeAlias type="com.zheng.pojo.Books" alias="Books"/>
+        <typeAlias type="com.zheng.pojo.Customer" alias="customer"/>
+    </typeAliases>
+
+    <!--加载映射配置文件-->
+    <mappers>
+        <mapper resource="com/zheng/dao/BookMapper.xml"/>
+        <mapper resource="com/zheng/dao/CustomerMapper.xml"/>
+    </mappers>
+
+</configuration>
+
+

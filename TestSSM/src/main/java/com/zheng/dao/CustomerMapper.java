@@ -1,9 +1,11 @@
 package com.zheng.dao;
 
 import com.zheng.pojo.Customer;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface CustomerMapper {
 
     /**

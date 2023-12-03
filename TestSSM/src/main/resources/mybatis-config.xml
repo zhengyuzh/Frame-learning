@@ -6,16 +6,19 @@
 
     <!--配置数据源 交给spring去做-->
 
+    <!--日志-->
+    <settings>
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+
+    <!--批量设置别名，会自动的将该包下的所有类定义了别名，别名就是其自身且不区分大小-->
     <typeAliases>
-        <!--批量设置别名，会自动的将该包下的所有类定义了别名，别名就是其自身且不区分大小-->
-        <typeAlias type="com.zheng.pojo.Books" alias="Books"/>
-        <typeAlias type="com.zheng.pojo.Customer" alias="customer"/>
+        <package name="com.zheng.pojo"/>
     </typeAliases>
 
-    <!--加载映射配置文件-->
+    <!--将包内的映射器接口全部注册为映射器-->
     <mappers>
-        <mapper resource="com/zheng/dao/BookMapper.xml"/>
-        <mapper resource="com/zheng/dao/CustomerMapper.xml"/>
+        <package name="com.zheng.dao"/>
     </mappers>
 
 </configuration>

@@ -2,10 +2,11 @@ package com.zheng.dao;
 
 import com.zheng.pojo.Books;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-
+@Repository
 public interface BookMapper {
 
 

@@ -3,14 +3,16 @@ package com.zheng.service.impl;
 import com.zheng.dao.CustomerMapper;
 import com.zheng.pojo.Customer;
 import com.zheng.service.CustomerService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Repository("CustomerServiceImpl") //起个名称
+@Service
 public class CustomerServiceImpl implements CustomerService {
 
-    //调用dao层
+    @Autowired
     private CustomerMapper customerMapper;
 
     public void setCustomerMapper(CustomerMapper customerMapper) {

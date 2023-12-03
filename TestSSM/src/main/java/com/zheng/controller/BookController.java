@@ -15,13 +15,8 @@ import java.util.List;
 @RequestMapping("/book")
 public class BookController {
 
-
-
-
     @Autowired
-    @Qualifier("BookServiceImpl")
     private BookService bookService;
-
 
     /**
      * 查询所有的书籍，并且返回一个书籍展示页面

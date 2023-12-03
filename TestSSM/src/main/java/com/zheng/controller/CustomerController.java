@@ -16,7 +16,6 @@ import java.util.List;
 public class CustomerController {
 
     @Autowired
-    @Qualifier("CustomerServiceImpl")
     private CustomerService customerService;
 
 

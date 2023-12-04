@@ -37,14 +37,17 @@
         <property name="dataSource" ref="dataSource"/>
         <!--绑定mybatis的配置文件-->
         <property name="configLocation" value="classpath:mybatis-config.xml"></property>
+
+        <!--mapper.xml所在位置-->
+        <property name="mapperLocations" value="classpath:mapper/*Mapper.xml" />
     </bean>
 
     <!--4、配置dao接口扫描包，动态的实现Dao接口可以注入到spring容器中-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <!--注入sqlsessionFactory-->
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
-        <!--要扫描的包-->
-        <property name="basePackage" value="com.zheng.dao"/>
+        <!--mapper接口所在的包-->
+        <property name="basePackage" value="com.zheng.dao" />
     </bean>
 
 

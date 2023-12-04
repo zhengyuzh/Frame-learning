@@ -16,10 +16,10 @@
         <package name="com.zheng.pojo"/>
     </typeAliases>
 
-    <!--将包内的映射器接口全部注册为映射器-->
-    <mappers>
-        <package name="com.zheng.dao"/>
-    </mappers>
+    <!--将包内的映射器接口全部注册为映射器  sql配置文件和接口放到同一目录下、分开放不好使-->
+    <!--<mappers>-->
+    <!--    <package name="com.zheng.dao"/>-->
+    <!--</mappers>-->
 
 </configuration>
 

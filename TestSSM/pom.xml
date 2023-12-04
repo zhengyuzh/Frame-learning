@@ -12,6 +12,16 @@
         <java.version>1.8</java.version>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
+        <junit.version>4.11</junit.version>
+        <mysql.connector.java.version>6.0.6</mysql.connector.java.version>
+        <c3p0.version>0.9.5.2</c3p0.version>
+        <servlet.api.version>2.5</servlet.api.version>
+        <jstl.version>1.2</jstl.version>
+        <mybatis.version>3.5.2</mybatis.version>
+        <mybatis.spring.version>2.0.2</mybatis.spring.version>
+        <spring.webmvc.version>5.1.9.RELEASE</spring.webmvc.version>
+        <spring.jdbc.version>5.1.9.RELEASE</spring.jdbc.version>
+        <log4j.version>1.2.17</log4j.version>
     </properties>
 
 
@@ -23,7 +33,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.11</version>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -31,56 +41,62 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>6.0.6</version>
+            <version>${mysql.connector.java.version}</version>
         </dependency>
+
         <!--数据库连接池-->
         <dependency>
             <groupId>com.mchange</groupId>
             <artifactId>c3p0</artifactId>
-            <version>0.9.5.2</version>
+            <version>${c3p0.version}</version>
         </dependency>
+
         <!--Servlet -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
-            <version>2.5</version>
+            <version>${servlet.api.version}</version>
         </dependency>
+
         <!--jsp-->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
-            <version>1.2</version>
+            <version>${jstl.version}</version>
         </dependency>
+
         <!--mybatis-->
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
-            <version>3.5.2</version>
+            <version>${mybatis.version}</version>
         </dependency>
+
         <!--mybatis-spring-->
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis-spring</artifactId>
-            <version>2.0.2</version>
+            <version>${mybatis.spring.version}</version>
         </dependency>
+
         <!--spring-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
-            <version>5.1.9.RELEASE</version>
+            <version>${spring.webmvc.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
-            <version>5.1.9.RELEASE</version>
+            <version>${spring.jdbc.version}</version>
         </dependency>
 
         <!-- Log4j 配置 -->
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
-            <version>1.2.17</version>
+            <version>${log4j.version}</version>
         </dependency>
 
     </dependencies>

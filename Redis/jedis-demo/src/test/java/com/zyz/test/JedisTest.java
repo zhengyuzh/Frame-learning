@@ -1,5 +1,6 @@
 package com.zyz.test;
 
+import com.zyz.jedis.util.JedisConnectionFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -62,7 +63,10 @@ public class JedisTest {
     @Test
     void testHash(){
         //设置值
-        jedis.hset("user:1","name","zhangsan");
+        // jedis.hset("user:1","name","zhangsan");
+
+        //使用连接池
+        jedis = JedisConnectionFactory.getJedis();
         jedis.hset("user:1","age","18");
 
         //取值

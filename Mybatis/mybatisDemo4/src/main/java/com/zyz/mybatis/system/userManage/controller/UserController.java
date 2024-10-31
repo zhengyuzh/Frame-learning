@@ -3,6 +3,8 @@ package com.zyz.mybatis.system.userManage.controller;
 import com.zyz.mybatis.common.Result;
 import com.zyz.mybatis.system.userManage.entity.User;
 import com.zyz.mybatis.system.userManage.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,12 +24,14 @@ import java.util.List;
 @RestController
 @RequestMapping("/user")
 public class UserController {
+    private Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
     UserService userService;
 
     @GetMapping("/getAllUser")
     public Result getUserList(){
+        logger.info("Module: Enter UserController getAllUser Start");
         List<User> userList = userService.getUserList();
         return new Result(00,"成功",userList);
     }

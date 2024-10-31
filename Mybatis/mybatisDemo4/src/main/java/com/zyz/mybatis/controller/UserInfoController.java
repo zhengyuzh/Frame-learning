@@ -3,6 +3,8 @@ package com.zyz.mybatis.controller;
 import com.zyz.mybatis.common.Result;
 import com.zyz.mybatis.entity.UserInfo;
 import com.zyz.mybatis.service.UserInfoService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +23,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/user")
 public class UserInfoController {
+    private Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
     private UserInfoService userService;
@@ -33,6 +36,7 @@ public class UserInfoController {
      **/
     @PostMapping("/findAllUser")
     public Result findAllUser(){
+        logger.info("Enter UserInfoController findAllUser method");
         List<UserInfo> userList = userService.findAllUser();
         return new Result(200,"成功",userList);
     }
@@ -45,6 +49,7 @@ public class UserInfoController {
      **/
     @PostMapping("/getOneUser")
     public Result getOneUser(Integer id){
+        logger.info("Enter UserInfoController getOneUser method");
         UserInfo userInfo = userService.getOneUser(id);
         return new Result(200,userInfo);
     }

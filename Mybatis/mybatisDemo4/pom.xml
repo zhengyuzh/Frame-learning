@@ -58,6 +58,22 @@
             <version>3.2.0</version>
         </dependency>
 
+        <!--日志框架接口-->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <!--日志框架接口实现-->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+        </dependency>
+        <!--日志框架核心组件-->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+        </dependency>
+
     </dependencies>
     <dependencyManagement>
         <dependencies>

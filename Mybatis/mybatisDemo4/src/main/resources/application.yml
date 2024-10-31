@@ -36,15 +36,3 @@ mybatis-plus:
       logic-not-delete-value: 1
       # 删除后
       logic-delete-value: 0
-
-# 日志配置
-logging:
-  pattern:
-    # 日志输出格式
-    console: "%d{yyyy-MM-dd HH:mm:ss} %clr(%5p) [%thread] %clr(%logger){cyan} : %msg%n"
-  level:
-    #    trace < debug < info < warn < error < fatal
-    # 全局日志级别
-    root: info
-    # 指定包日志级别
-    com.zyz.mybatis: warn

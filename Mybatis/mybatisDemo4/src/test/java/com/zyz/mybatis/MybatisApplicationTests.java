@@ -1,6 +1,7 @@
 package com.zyz.mybatis;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.zyz.mybatis.entity.GoodTwo;
 import com.zyz.mybatis.entity.GoodsThree;
 import com.zyz.mybatis.mapper.GoodTwoDao;
@@ -125,5 +126,43 @@ class MybatisApplicationTests {
          **/
 
     }
+
+    @Test
+    void testQuery4() {
+        LambdaQueryWrapper<Goods> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+        lambdaQueryWrapper.eq(Goods::getId, "1001")
+                          .eq(Goods::getName, "茶杯");
+        Goods goods = goodsDao.selectOne(lambdaQueryWrapper);
+        System.out.println(goods.toString());
+        /**
+         * @description: 使用 LambdaQueryWrapper 测试结果
+         *
+         * ==>  Preparing: SELECT id,amount,price,name FROM goods WHERE (id = ? AND name = ?)
+         * ==> Parameters: 1001(String), 茶杯(String)
+         * <==    Columns: id, amount, price, name
+         * <==        Row: 1001, 10, 13.60, 茶杯
+         * <==      Total: 1
+         * Goods(id=1001, name=茶杯, amount=10, price=13.6)
+         **/
+
+        QueryWrapper<Goods> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("id", "1003")
+                .eq("name", "保温杯");
+        Goods goods1 = goodsDao.selectOne(queryWrapper);
+        System.out.println(goods1.toString());
+
+        /**
+         * @description:使用 QueryWrapper 测试结果
+         *
+         * ==>  Preparing: SELECT id,amount,price,name FROM goods WHERE (id = ? AND name = ?)
+         * ==> Parameters: 1003(String), 保温杯(String)
+         * <==    Columns: id, amount, price, name
+         * <==        Row: 1003, 10, 23.60, 保温杯
+         * <==      Total: 1
+         * Goods(id=1003, name=保温杯, amount=10, price=23.6)
+         **/
+
+    }
+
 
 }

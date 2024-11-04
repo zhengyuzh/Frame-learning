@@ -1,5 +1,6 @@
 package com.zyz.mybatis.controller;
 
+import com.zyz.mybatis.base.audit.LogAnnotation;
 import com.zyz.mybatis.common.Result;
 import com.zyz.mybatis.entity.UserInfo;
 import com.zyz.mybatis.service.UserInfoService;
@@ -34,6 +35,7 @@ public class UserInfoController {
      * @date: 2024/8/30 9:23
      * @return: com.zyz.mybatis.common.Result
      **/
+    @LogAnnotation(desc="查询所有用户")
     @PostMapping("/findAllUser")
     public Result findAllUser(){
         logger.info("Enter UserInfoController findAllUser method");
@@ -47,6 +49,7 @@ public class UserInfoController {
      * @date: 2024/8/30 9:26
      * @return: com.zyz.mybatis.common.Result
      **/
+    @LogAnnotation(desc="查询某一个用户")
     @PostMapping("/getOneUser")
     public Result getOneUser(Integer id){
         logger.info("Enter UserInfoController getOneUser method");
